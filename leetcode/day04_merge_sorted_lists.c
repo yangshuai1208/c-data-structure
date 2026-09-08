@@ -74,11 +74,65 @@ static void test_empty_lists(void)
     assert(merge_sorted_lists(NULL, NULL) == NULL);
     assert(merge_sorted_lists(NULL, &node) == &node);
 }
+static void test_second_list_empty(void)
+{
+    ListNode node = {10, NULL};
 
+    ListNode *head = merge_sorted_lists(&node, NULL);
+
+    assert(head == &node);
+    assert(head->value == 10);
+    assert(head->next == NULL);
+}
+static void test_duplicate_values(void)
+{
+    ListNode list1_node3 = {3, NULL};
+    ListNode list1_node1 = {1, &list1_node3};
+
+    ListNode list2_node3 = {3, NULL};
+    ListNode list2_node1 = {1, &list2_node3};
+
+    ListNode *head =
+        merge_sorted_lists(&list1_node1, &list2_node1);
+
+    /*
+     * 相等时使用<=，所以list1中的节点先进入结果链表。
+     */
+    assert(head == &list1_node1);
+    assert(list1_node1.next == &list2_node1);
+    assert(list2_node1.next == &list1_node3);
+    assert(list1_node3.next == &list2_node3);
+    assert(list2_node3.next == NULL);
+}
+
+static void test_uneven_lists(void)
+{
+    ListNode list1_node7 = {7, NULL};
+    ListNode list1_node1 = {1, &list1_node7};
+
+    ListNode list2_node5 = {5, NULL};
+    ListNode list2_node4 = {4, &list2_node5};
+    ListNode list2_node3 = {3, &list2_node4};
+    ListNode list2_node2 = {2, &list2_node3};
+
+    ListNode *head =
+        merge_sorted_lists(&list1_node1, &list2_node2);
+
+    assert(head == &list1_node1);
+    assert(list1_node1.next == &list2_node2);
+    assert(list2_node2.next == &list2_node3);
+    assert(list2_node3.next == &list2_node4);
+    assert(list2_node4.next == &list2_node5);
+    assert(list2_node5.next == &list1_node7);
+    assert(list1_node7.next == NULL);
+}
 int main(void)
 {
     test_normal_lists();
     test_empty_lists();
+    test_second_list_empty();
+    test_duplicate_values();
+    test_uneven_lists();
 
     printf("merge sorted lists tests passed\n");
     return 0;

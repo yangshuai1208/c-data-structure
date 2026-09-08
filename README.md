@@ -51,3 +51,27 @@ valid parentheses tests passed
 ```text
 binary search tests passed
 remove duplicates tests passed
+
+## Day20：数据结构与算法综合训练
+
+本日完成链表、环形队列、二分和数组去重综合复习。
+
+### 代码练习
+
+- 复查并完善`leetcode/day04_merge_sorted_lists.c`。
+- 增加空链表、重复值和不等长链表测试。
+- 新增`data-structure/day20_ring_queue.c`。
+- 完成空队列、满队列、回绕、空指针和FIFO顺序测试。
+
+### 核心结论
+
+- 合并两个有序链表：`O(m+n)`时间、`O(1)`额外空间。
+- 环形队列的`push/pop/peek`均为`O(1)`。
+- 使用`count`可以区分`head == tail`时的队空和队满。
+- UART 115200、8N1理论吞吐量约为11520字节/秒。
+- 任务阻塞20ms可能积累约231字节，128字节缓冲区不足。
+- `volatile`不能替代临界区、原子变量或RTOS同步机制。
+
+### 工程应用
+
+固定数组环形缓冲区具有容量可控、访问时间确定、无动态内存碎片等特点，更适合UART中断接收。发生溢出时应记录错误、丢弃异常帧并重新寻找帧头，不能静默覆盖未解析字节。
