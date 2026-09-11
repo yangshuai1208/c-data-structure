@@ -129,3 +129,21 @@ remove duplicates tests passed
 尚未实现日志分级、轮转、磁盘故障恢复和断电持久化保证。
 
 详细笔记：notes/day22_cpp_concurrency.md
+
+
+```markdown
+### Day23：Makefile、GDB与工程排错
+
+- 使用Makefile完成C++多文件工程的编译与链接。
+- 补全源文件和头文件依赖，验证增量构建。
+- 使用GDB函数断点和条件断点定位数组越界。
+- 通过`i=3、count=3、sum=60`证明循环边界错误。
+- 将循环条件从`i <= count`修复为`i < count`。
+- 学习使用线程调用栈分析正常等待、死锁和死循环。
+- 完成“排序＋一次遍历”的合并重叠区间算法。
+
+相关文件：
+
+- `notes/day23_makefile_gdb_review.md`
+- `cpp/day23_merge_intervals.cpp`
+- `linux/day23_build_debug/`
